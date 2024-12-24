@@ -1,4 +1,4 @@
-var xhr = new xhrHttpRequest();
+var xhr = new XMLHttpRequest();
 /*  
     Creates a new XMLHttpRequest object (xhr).
     This object is used to make asynchronous requests to the server to fetch the XML file (item.xml).
