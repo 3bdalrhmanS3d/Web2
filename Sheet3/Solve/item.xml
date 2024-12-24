@@ -1,0 +1,22 @@
+ <items>
+    <item>
+        <name>Item 1</name>
+        <price>19.99</price>
+        <description>Description for Item 1</description>
+    </item>
+    <item>
+        <name>Item 2</name>
+        <price>29.99</price>
+        <description>Description for Item 2</description>
+     </item>
+    <item>
+        <name>Item 3</name>
+        <price>39.99</price>
+        <description>Description for Item 3</description>
+    </item>
+    <item>
+        <name>Item 4</name>
+        <price>49.99</price>
+        <description>Description for Item 4</description>   
+    </item>
+ </items>

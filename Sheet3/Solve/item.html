@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Item table</title>
+</head>
+<body>
+    <h2>sheet 3</h2>
+    <button onclick="loadXML()"> click on </button>
+    <table id = 'item' >    </table>
+    <script>
+        
+        function loadXML(){
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function(){
+                if(this.readyState == 4 && this.status == 200){
+                    myFunction(this);
+                }
+            };
+            xhttp.open("GET", "item.xml", true);
+            xhttp.send();
+        }
+
+        function myFunction(xml){
+            var i;
+            var xmlDoc = xml.responseXML;
+            var table = "<tr><th>Item</th><th>Price</th></tr>";
+            var x = xmlDoc.getElementsByTagName("item");
+            for(i = 0; i < x.length; i++){
+                table += "<tr><td>" + x[i].getElementsByTagName("name")[0].childNodes[0].nodeValue + "</td><td>" + x[i].getElementsByTagName("price")[0].childNodes[0].nodeValue + "</td></tr>";
+            }
+            document.getElementById("item").innerHTML = table;
+        }
+    </script>
+</body>
+</html>
