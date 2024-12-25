@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2> View data</h2>
+    Number of data to view: <input type="number" id="num">
+
+    <div id="objects"></div>
+
+    <script>
+        // json 
+        
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "data.json", true);
+        xhr.onreadystatechange = function()
+        {
+            document.getElementById('num').addEventListener('input', function()
+            {
+                data = JSON.parse(xhr.responseText);
+                let num  =document.getElementById('num').value;
+
+                let html = '';
+                for(let i = 0 ; i < num ; i++)
+                {
+                    html += `<br> ${data[i].id} + ' ' + ${data[i].name} + ' ' + ${data[i].email} + '</br>`;
+                }
+                objects.innerHTML = html;
+            });
+        }
+        xhr.send();
+    </script>
+</body>
+</html>
