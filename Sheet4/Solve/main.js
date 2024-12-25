@@ -54,3 +54,27 @@ function nextPerson()
         displayData(currentIndex);
     }
 }
+
+///////////
+let data = [];
+
+// Load JSON data from the server
+function loadJson() {
+  try {
+    xhr.open('GET', 'data.json', true);
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4) {
+        if (xhr.status === 200) {
+          // Parse JSON data
+          data = JSON.parse(xhr.responseText).persons;
+          displayData();
+        } else {
+          console.error(`Error loading data: ${xhr.statusText}`);
+        }
+      }
+    };
+    xhr.send(null);
+  } catch (error) {
+    console.error(`Error loading data: ${error.message}`);
+  }
+}
