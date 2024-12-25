@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+    <body>
+        <h2> Drow stars</h2>
+        <label for="starInput">Number of Stars:</label>
+        <input type="number" id="starInput" value="5" min="1">
+        <pre id="triangle"></pre>
+
+        <script> 
+
+            function drow(lines)
+            {
+                let triangle = '';
+                for( let i = 1 ; i <= lines ; i++)
+                {
+                    for( let j = 1 ; j <= i ; j++)
+                    {
+                        triangle += '*';
+                    }
+                    triangle += '\n';
+                }
+                document.getElementById('triangle').textContent = triangle;
+            }
+
+            // Add event listener to the input field
+            document.getElementById('starInput').addEventListener('input', function () {
+                const lines = parseInt(this.value) || 0; // Get the input value
+                drow(lines); // Draw the triangle
+            });
+
+            // Draw the initial triangle
+            drow(parseInt(document.getElementById('starInput').value));
+        </script>
+    </body>
+</html>
