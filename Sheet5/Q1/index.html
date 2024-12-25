@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News List</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .news-item { margin-bottom: 20px; border-bottom: 1px solid #ddd; padding-bottom: 10px; }
+        .news-title { font-size: 18px; font-weight: bold; }
+        .news-date { font-size: 14px; color: gray; }
+        .news-content { margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <div id="news-container"></div>
+    <button id="next-button">Next</button>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        let offset = 0;
+
+        function loadNews() {
+            $.ajax({
+                url: 'get_news.php',
+                type: 'GET',
+                data: { offset: offset },
+                success: function (response) {
+                    if (response.length > 0) {
+                        response.forEach(news => {
+                            const newsItem = `
+                                <div class="news-item">
+                                    <div class="news-title">${news.Title}</div>
+                                    <div class="news-date">${new Date(news.Published_date).toLocaleString()}</div>
+                                    <div class="news-content">${news.Content}</div>
+                                </div>`;
+                            $('#news-container').append(newsItem);
+                        });
+                        offset += response.length;
+                    } else {
+                        alert('No more news to load.');
+                    }
+                },
+                error: function () {
+                    alert('Failed to fetch news.');
+                }
+            });
+        }
+
+        $(document).ready(function () {
+            loadNews();
+
+            $('#next-button').click(function () {
+                loadNews();
+            });
+        });
+    </script>
+</body>
+</html>
