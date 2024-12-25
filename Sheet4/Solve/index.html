@@ -1,21 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Person Details</title>
-    </head>
-    <body>
-        <h2>Person Details</h2>
-        
-        <div id="person-details">
-            <p><strong>Name :</strong> <span id="name"></span></p>
-            <p><strong>Age :</strong> <span id="age"></span></p>
-            <p><strong>City :</strong> <span id="city"></span></p>
-        </div>
-        <button id="prev-btn" onclick="previousPerson()">Previous</button>
-        <button id="next-btn" onclick="nextPerson()">Next</button>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XML Data Viewer</title>
+</head>
+<body>
+    <h2>Person Details</h2>
+    <div id="person-details">
+        <p><strong>Name:</strong> <span id="name">Loading...</span></p>
+        <p><strong>Age:</strong> <span id="age">Loading...</span></p>
+        <p><strong>City:</strong> <span id="city">Loading...</span></p>
+    </div>
+    <button onclick="previousPerson()">Previous</button>
+    <button onclick="nextPerson()">Next</button>
 
-        <script src="main.js"></script>
-    </body>
+    <script src="main.js"></script>
+</body>
 </html>
