@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab Exam</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .order { margin-bottom: 10px; border-bottom: 1px solid #ddd; padding-bottom: 10px; }
+    </style>
+</head>
+<body>
+    <h1>Lab Exam: Place Your Order</h1>
+    <!-- You are creating a web application for a restaurant where customers can place their food orders. The application should allow customers to submit their orders via a form and display the current orders on the same webpage without needing to refresh. The structure of Orders table is:
+    CREATE TABLE orders ( id INT AUTO_INCREMENT PRIMARY KEY,  customer_name VARCHAR(100) NOT NULL,    food_item VARCHAR(100) NOT NULL,  quantity INT NOT NULL); -->
+    
+    <div class="form">
+        <form id="order-form">
+            <label for="customer_name">Customer Name:</label><br>
+            <input type="text" id="customer_name" name="customer_name" required><br><br>
+
+            <label for="food_item">Food Item:</label><br>
+            <input type="text" id="food_item" name="food_item" required><br><br>
+
+            <label for="quantity">Quantity:</label><br>
+            <input type="number" id="quantity" name="quantity" required><br><br>
+
+            <button type="submit">Submit Order</button>
+        </form>
+    </div>
+
+    <div class="orders-list">
+        <h2>Current Orders</h2>
+        <div id="orders-container"></div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        // Fetch and display orders
+        function fetchOrders() {
+            $.ajax({
+                url: 'fetch_orders.php',
+                type: 'GET',
+                success: function(response) {
+                    $('#orders-container').empty();
+                    response.forEach(order => {
+                        const orderHTML = `
+                            <div class="order">
+                                <p><strong>Customer Name:</strong> ${order.customer_name}</p>
+                                <p><strong>Food Item:</strong> ${order.food_item}</p>
+                                <p><strong>Quantity:</strong> ${order.quantity}</p>
+                            </div>`;
+                        $('#orders-container').append(orderHTML);
+                    });
+                },
+                error: function() {
+                    alert('Failed to fetch orders.');
+                }
+            });
+        }
+
+        // Submit order
+        $('#order-form').submit(function(e) {
+            e.preventDefault();
+
+            const formData = $(this).serialize();
+            $.ajax({
+                url: 'add_order.php',
+                type: 'POST',
+                data: formData,
+                success: function(response) {
+                    alert(response);
+                    fetchOrders(); // Refresh orders
+                    $('#order-form')[0].reset(); // Reset form
+                },
+                error: function() {
+                    alert('Failed to place order.');
+                }
+            });
+        });
+
+        // Initial fetch of orders
+        $(document).ready(function() {
+            fetchOrders();
+        });
+    </script>
+</body>
+</html>
